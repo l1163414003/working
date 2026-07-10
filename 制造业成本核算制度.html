@@ -1,0 +1,1400 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>离散制造型企业成本核算专项制度（详尽版）</title>
+<style>
+  /* ===== 全局变量 ===== */
+  :root {
+    --primary: #1a3a5c;
+    --primary-light: #2c5f8a;
+    --accent: #e8831a;
+    --bg: #f8f9fa;
+    --card-bg: #ffffff;
+    --text: #2d3436;
+    --text-secondary: #636e72;
+    --border: #dfe6e9;
+    --success: #00b894;
+    --danger: #d63031;
+    --warning: #fdcb6e;
+    --info: #0984e3;
+    --radius: 8px;
+    --shadow: 0 2px 12px rgba(0,0,0,0.06);
+    --shadow-lg: 0 8px 30px rgba(0,0,0,0.10);
+  }
+
+  /* ===== 基础重置 ===== */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 15px;
+    line-height: 1.75;
+    color: var(--text);
+    background: #eef1f5;
+  }
+
+  /* ===== 打印支持（强制保留背景色） ===== */
+  @media print {
+    /* 关键：强制浏览器打印背景色 */
+    * {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+      color-adjust: exact !important;
+    }
+    body {
+      background: #eef1f5 !important;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    .container {
+      max-width: 100%;
+      box-shadow: none;
+      margin: 0;
+    }
+    .page-break { page-break-before: always; }
+    .no-print { display: none; }
+    pre, code.block {
+      white-space: pre-wrap;
+      word-break: break-all;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    /* 封面确保深色背景打印 */
+    .cover {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    /* 表格确保斑马纹打印 */
+    table thead th {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    tbody tr:nth-child(even) {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    /* Insight 框背景 */
+    .insight-box {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    /* footer */
+    .footer {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+  }
+
+  /* ===== 容器 ===== */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    background: #fff;
+    min-height: 100vh;
+    box-shadow: var(--shadow-lg);
+  }
+
+  /* ===== 封面头部 ===== */
+  .cover {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: #fff;
+    padding: 60px 60px 50px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 300px; height: 300px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 50%;
+  }
+  .cover::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: -60px;
+    width: 240px; height: 240px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 50%;
+  }
+  .cover h1 {
+    font-size: 2.4em;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 1;
+  }
+  .cover .subtitle {
+    font-size: 1.1em;
+    opacity: 0.85;
+    position: relative;
+    z-index: 1;
+  }
+  .cover .meta-bar {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    margin-top: 28px;
+    font-size: 0.9em;
+    opacity: 0.8;
+    position: relative;
+    z-index: 1;
+    flex-wrap: wrap;
+  }
+  .cover .meta-bar span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .cover .badge {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    padding: 4px 16px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: 600;
+    margin-top: 18px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ===== 内容区 ===== */
+  .content { padding: 40px 60px 60px; }
+
+  /* ===== 标题层级 ===== */
+  h2 {
+    font-size: 1.6em;
+    color: var(--primary);
+    border-left: 4px solid var(--accent);
+    padding-left: 16px;
+    margin: 44px 0 20px;
+    line-height: 1.4;
+  }
+  h3 {
+    font-size: 1.25em;
+    color: var(--primary-light);
+    margin: 32px 0 14px;
+    padding-bottom: 6px;
+    border-bottom: 1px dashed var(--border);
+  }
+  h4 {
+    font-size: 1.08em;
+    color: #444;
+    margin: 22px 0 10px;
+  }
+
+  /* ===== 段落与文字 ===== */
+  p { margin: 8px 0 14px; text-indent: 2em; }
+  p.no-indent { text-indent: 0; }
+  strong { color: #1a1a1a; }
+  ul, ol { margin: 8px 0 14px 1.6em; }
+  li { margin: 4px 0; }
+
+  /* ===== 表格 ===== */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0 22px;
+    font-size: 0.93em;
+    box-shadow: var(--shadow);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  thead th {
+    background: var(--primary);
+    color: #fff;
+    padding: 12px 14px;
+    text-align: left;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  tbody td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  tbody tr:nth-child(even) { background: #f8fafb; }
+  tbody tr:hover { background: #eef5fa; }
+  tbody td:first-child { font-weight: 500; }
+
+  /* ===== 代码块/ASCII艺术 ===== */
+  pre {
+    background: #1e2a36;
+    color: #c8d6e5;
+    padding: 20px 24px;
+    border-radius: var(--radius);
+    overflow-x: auto;
+    font-family: "SF Mono", "Consolas", "Courier New", monospace;
+    font-size: 0.85em;
+    line-height: 1.65;
+    margin: 14px 0 22px;
+    white-space: pre;
+    border: 1px solid #2d3a47;
+  }
+  code.block {
+    display: block;
+    background: #1e2a36;
+    color: #c8d6e5;
+    padding: 20px 24px;
+    border-radius: var(--radius);
+    overflow-x: auto;
+    font-family: "SF Mono", "Consolas", "Courier New", monospace;
+    font-size: 0.85em;
+    line-height: 1.65;
+    margin: 14px 0 22px;
+    white-space: pre;
+  }
+
+  /* ===== 引用提示 ===== */
+  blockquote {
+    background: #fff9e6;
+    border-left: 4px solid var(--accent);
+    padding: 12px 20px;
+    margin: 16px 0 22px;
+    border-radius: 0 var(--radius) var(--radius) 0;
+    color: #7a6200;
+    font-style: italic;
+  }
+
+  /* ===== Insight 框 ===== */
+  .insight-box {
+    background: linear-gradient(135deg, #f0f7ff 0%, #e8f4fd 100%);
+    border: 1px solid #bcd4ec;
+    border-radius: var(--radius);
+    padding: 28px 30px;
+    margin: 32px 0 20px;
+    position: relative;
+  }
+  .insight-box .insight-title {
+    font-size: 1.15em;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 14px;
+  }
+  .insight-box ol {
+    list-style: none;
+    counter-reset: insight-counter;
+    padding-left: 0;
+  }
+  .insight-box ol li {
+    counter-increment: insight-counter;
+    margin: 10px 0;
+    padding-left: 2em;
+    position: relative;
+  }
+  .insight-box ol li::before {
+    content: counter(insight-counter);
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: var(--accent);
+    color: #fff;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 22px;
+    font-size: 0.8em;
+    font-weight: 700;
+  }
+
+  /* ===== 流程图 ASCII 美化 ===== */
+  .flow-chart {
+    background: #f4f6f8;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    margin: 14px 0 22px;
+    text-align: center;
+  }
+  .flow-chart pre {
+    background: transparent;
+    color: #333;
+    border: none;
+    padding: 0;
+    margin: 0;
+    display: inline-block;
+    text-align: left;
+  }
+
+  /* ===== 信息卡片 ===== */
+  .info-card {
+    background: #f0f7ff;
+    border-left: 4px solid var(--info);
+    padding: 14px 20px;
+    border-radius: 0 var(--radius) var(--radius) 0;
+    margin: 14px 0 22px;
+  }
+  .info-card.warning {
+    background: #fff8e8;
+    border-left-color: var(--warning);
+  }
+  .info-card.danger {
+    background: #fff0f0;
+    border-left-color: var(--danger);
+  }
+  .info-card.success {
+    background: #f0fff6;
+    border-left-color: var(--success);
+  }
+
+  /* ===== 页脚 ===== */
+  .footer {
+    background: #f4f6f8;
+    padding: 24px 60px;
+    text-align: center;
+    font-size: 0.85em;
+    color: var(--text-secondary);
+    border-top: 1px solid var(--border);
+  }
+  .footer p { text-indent: 0; margin: 4px 0; }
+
+  /* ===== 分隔线 ===== */
+  hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 30px 0;
+  }
+
+  /* ===== 响应式 ===== */
+  @media (max-width: 768px) {
+    .cover { padding: 36px 24px 30px; }
+    .cover h1 { font-size: 1.6em; }
+    .cover .meta-bar { gap: 14px; }
+    .content { padding: 24px 20px 36px; }
+    table { font-size: 0.82em; }
+    thead th, tbody td { padding: 8px 10px; }
+    pre { padding: 14px 16px; font-size: 0.78em; }
+    .insight-box { padding: 20px 18px; }
+    h2 { font-size: 1.35em; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- ==================== 封面头部 ==================== -->
+  <header class="cover">
+    <h1>离散制造型企业<br>成本核算专项制度</h1>
+    <p class="subtitle">详尽版 · 含实施细则、操作手册、KPI 考核</p>
+    <div class="meta-bar">
+      <span>📋 版本：V1.0</span>
+      <span>🏭 适用：离散制造（机械/汽车/电子设备等）</span>
+      <span>📅 更新：2026-06-29</span>
+      <span>✍️ 编制：CC - AI 助理</span>
+    </div>
+    <span class="badge">内部机密</span>
+  </header>
+
+  <div class="content">
+
+    <!-- ==================== 第一章 ==================== -->
+    <h2>第一章 总则</h2>
+
+    <h3>1.1 制度目的</h3>
+    <p>为规范公司成本核算工作，准确反映生产成本构成，及时提供成本信息以支持定价决策、降本增效和绩效考核，根据《企业会计准则》及相关财税法规，结合本公司离散制造业务特点，制定本制度。</p>
+
+    <h3>1.2 适用范围</h3>
+    <p>本制度适用于公司所有生产车间、辅助生产部门及与生产成本相关的职能部门。</p>
+
+    <h3>1.3 核心原则</h3>
+    <table>
+      <thead><tr><th style="width:16%">原则</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td>实际成本原则</td><td>以实际发生的经济业务为依据，不得以计划成本、估计成本代替</td></tr>
+        <tr><td>分期核算原则</td><td>按月为核算周期，与会计期间一致</td></tr>
+        <tr><td>一贯性原则</td><td>成本核算方法一经确定不得随意变更</td></tr>
+        <tr><td>权责发生制原则</td><td>成本费用在实际发生的会计期间确认</td></tr>
+        <tr><td>重要性原则</td><td>对重大成本项目精细核算，零星项目可简化处理</td></tr>
+      </tbody>
+    </table>
+
+    <h3>1.4 成本核算的基本假设</h3>
+    <ul>
+      <li><strong>会计主体</strong>：以公司法人为主体，各车间为成本中心</li>
+      <li><strong>持续经营</strong>：假定公司持续经营，资产按历史成本计量</li>
+      <li><strong>货币计量</strong>：以人民币为记账本位币</li>
+      <li><strong>会计分期</strong>：月度核算，月度截止日为每月最后一天</li>
+    </ul>
+
+    <h3>1.5 术语定义</h3>
+    <table>
+      <thead><tr><th style="width:20%">术语</th><th>定义</th></tr></thead>
+      <tbody>
+        <tr><td>BOM（Bill of Materials）</td><td>物料清单，定义产品所需的全部物料及其用量</td></tr>
+        <tr><td>标准成本</td><td>基于标准用量和标准价格预先制定的目标成本</td></tr>
+        <tr><td>成本中心</td><td>归集和分配成本的责任单位</td></tr>
+        <tr><td>在制品（WIP）</td><td>已投入生产但尚未完工的产品</td></tr>
+        <tr><td>制造费用</td><td>间接材料、间接人工、折旧、水电等间接生产费用</td></tr>
+        <tr><td>成本差异</td><td>实际成本与标准成本的偏差</td></tr>
+        <tr><td>工时费率</td><td>单位工时分摊的人工或制造费用金额</td></tr>
+      </tbody>
+    </table>
+
+    <hr>
+
+    <!-- ==================== 第二章 ==================== -->
+    <h2>第二章 成本核算组织架构与职责</h2>
+
+    <h3>2.1 组织架构图</h3>
+    <pre>                    ┌─────────────┐
+                    │   财务总监   │
+                    └──────┬──────┘
+                           │
+              ┌────────────┼────────────┐
+              │            │            │
+     ┌────────▼──────┐ ┌──▼──────────┐ ┌▼──────────────┐
+     │   成本会计组   │ │  总账会计组  │ │  管理会计组   │
+     └───────┬───────┘ └─────────────┘ └───────────────┘
+             │
+    ┌────────┼────────┬──────────────┐
+    │        │        │              │
+┌───▼──┐ ┌──▼───┐ ┌──▼───┐  ┌──────▼──────┐
+│车间1 │ │车间2 │ │仓库  │  │采购/销售协同│
+│核算员│ │核算员│ │核算员│  │   岗位      │
+└──────┘ └──────┘ └──────┘  └─────────────┘</pre>
+
+    <h3>2.2 各岗位职责明细</h3>
+
+    <h4>2.2.1 成本会计组（核心岗位）</h4>
+    <table>
+      <thead><tr><th>岗位</th><th>职责</th><th>KPI</th></tr></thead>
+      <tbody>
+        <tr><td>成本主管</td><td>制定成本核算政策、审核成本数据、出具成本报表、组织成本分析会</td><td>核算准确率 ≥ 99%</td></tr>
+        <tr><td>成本会计A（材料）</td><td>BOM维护、材料领用稽核、材料成本差异计算、供应商价格对比</td><td>材料差异率 ≤ 3%</td></tr>
+        <tr><td>成本会计B（人工）</td><td>工时统计审核、人工费率计算、人工成本差异分析</td><td>工时数据准确率 ≥ 99%</td></tr>
+        <tr><td>成本会计C（制造费用）</td><td>制造费用归集与分配、辅助生产费用交互分配、费用预算执行分析</td><td>费用差异率 ≤ 5%</td></tr>
+        <tr><td>成本会计D（在制品）</td><td>在制品盘点、完工与未完工成本分摊、工单关闭审核</td><td>WIP差异 ≤ 2%</td></tr>
+      </tbody>
+    </table>
+
+    <h4>2.2.2 车间核算员职责</h4>
+    <ul>
+      <li>每日填报《生产日报表》（产量、工时、材料消耗）</li>
+      <li>每班次记录设备运行时间及异常停机</li>
+      <li>负责在制品现场盘点（月盘）</li>
+      <li>审核工人计件/计时工资基础数据</li>
+      <li>向成本会计组提交月度生产数据汇总</li>
+    </ul>
+
+    <h4>2.2.3 仓库核算员职责</h4>
+    <ul>
+      <li>材料入库、出库及时录入 ERP 系统</li>
+      <li>确保系统库存与实际库存一致（动态盘点+月末全盘）</li>
+      <li>按工单/项目发料，杜绝无单领料</li>
+      <li>按月提交《存货进销存报表》</li>
+    </ul>
+
+    <h4>2.2.4 采购协同职责</h4>
+    <ul>
+      <li>及时录入采购价格，确保标准成本基础数据准确</li>
+      <li>供应商价格变动 3 日内通知成本组更新标准成本</li>
+    </ul>
+
+    <h4>2.2.5 销售协同职责</h4>
+    <ul>
+      <li>新品立项时提供目标售价，成本组据此倒算目标成本</li>
+      <li>订单变更及时通知，避免工单成本核算偏差</li>
+    </ul>
+
+    <h3>2.3 成本核算审批流程</h3>
+    <pre>车间核算员上报 → 成本会计审核 → 成本主管复核 → 财务经理审批 → 财务总监签批
+                                                    │
+                                          （重大差异 > 10 万）
+                                                    │
+                                            ┌───────▼───────┐
+                                            │  总经理特批    │
+                                            └───────────────┘</pre>
+
+    <hr>
+
+    <!-- ==================== 第三章 ==================== -->
+    <h2>第三章 成本核算基础体系</h2>
+
+    <h3>3.1 成本要素分类</h3>
+    <p>离散制造企业的成本要素按经济用途分为四类：</p>
+    <pre>生产成本（制造成本）
+├── 直接材料
+│   ├── 主要原材料（构成产品实体的材料）
+│   ├── 外购半成品（外协件、外购组件）
+│   └── 辅助材料（不构成实体但有明确归属的辅料）
+│
+├── 直接人工
+│   ├── 直接生产工人工资
+│   ├── 加班工资（可追溯至工单）
+│   ├── 计件工资
+│   └── 社保、公积金等法定福利（直接人工部分）
+│
+├── 制造费用
+│   ├── 间接人工（班组长、质检、仓管、维修等）
+│   ├── 折旧费（生产设备、厂房）
+│   ├── 水电动力费
+│   ├── 维修费
+│   ├── 机物料消耗（刀具、润滑油、劳保等）
+│   ├── 检验试验费
+│   └── 其他间接制造费用
+│
+└── 外协加工费
+    ├── 工序外协（电镀、热处理等）
+    └── 整体外协（整机代工）</pre>
+
+    <h3>3.2 成本中心设置</h3>
+    <p>按责任归属和管理粒度设置三级成本中心：</p>
+    <table>
+      <thead><tr><th>层级</th><th>编码格式</th><th>举例</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td>一级</td><td>CC-XX</td><td>CC-01 制造事业部</td><td>最高归集层级</td></tr>
+        <tr><td>二级</td><td>CC-XX-XX</td><td>CC-01-01 机加工车间</td><td>车间/部门级</td></tr>
+        <tr><td>三级</td><td>CC-XX-XX-XX</td><td>CC-01-01-01 CNC班组</td><td>班组/产线级</td></tr>
+      </tbody>
+    </table>
+
+    <p><strong>成本中心编码表（示例）：</strong></p>
+    <pre>CC-01        制造事业部
+  CC-01-01     机加工车间
+    CC-01-01-01   CNC加工中心组
+    CC-01-01-02   车床班组
+    CC-01-01-03   铣床班组
+  CC-01-02     装配车间
+    CC-01-02-01   总装一线
+    CC-01-02-02   总装二线
+    CC-01-02-03   调试班组
+  CC-01-03     钣金车间
+CC-02        辅助生产部门
+  CC-02-01     模具中心
+  CC-02-02     设备动力科
+  CC-02-03     质检中心</pre>
+
+    <h3>3.3 成本对象设置</h3>
+    <pre>产品系列（Series）
+  └── 产品型号（Model）
+        └── 生产工单（Work Order）
+              └── 工序/步骤（Operation）</pre>
+
+    <table>
+      <thead><tr><th>成本对象层级</th><th>编码规则</th><th>示例</th><th>核算粒度</th></tr></thead>
+      <tbody>
+        <tr><td>产品系列</td><td>S-XXX</td><td>S-A01 数控机床系列</td><td>大类毛利</td></tr>
+        <tr><td>产品型号</td><td>M-XXXXX</td><td>M-A01-001 标准型CNC</td><td>单品毛利</td></tr>
+        <tr><td>生产工单</td><td>WO-XXXXXX</td><td>WO-202606-001</td><td>批次成本</td></tr>
+        <tr><td>工序</td><td>OP-XX</td><td>OP-01 车削</td><td>工序成本</td></tr>
+      </tbody>
+    </table>
+
+    <h3>3.4 成本核算方法的选择</h3>
+    <p>离散制造企业推荐采用 <strong>标准成本法 + 分批法（工单级）</strong> 的组合：</p>
+    <pre>标准成本法 ──── 用于日常核算、存货计价、预算控制
+      │
+      ├── 制定标准BOM → 标准物料成本
+      ├── 制定标准工艺路线 → 标准工时
+      ├── 制定标准费率 → 标准人工/制造费用
+      │
+      └── 月末：
+            ├── 实际成本 vs 标准成本 = 成本差异
+            └── 差异分摊至完工产品和在制品
+
+分批法（Job Order Costing）
+      │
+      └── 按工单归集成本
+            ├── 工单领料 → 直接材料成本
+            ├── 工单报工 → 直接人工成本
+            └── 工单分摊 → 制造费用</pre>
+
+    <hr>
+
+    <!-- ==================== 第四章 ==================== -->
+    <h2>第四章 BOM 管理与标准成本制定</h2>
+
+    <h3>4.1 BOM 管理体系</h3>
+
+    <h4>4.1.1 BOM 类型与用途</h4>
+    <table>
+      <thead><tr><th>BOM类型</th><th>用途</th><th>维护部门</th><th>更新频率</th></tr></thead>
+      <tbody>
+        <tr><td>设计BOM（E-BOM）</td><td>产品设计结构</td><td>研发部</td><td>按工程变更（ECN）</td></tr>
+        <tr><td>工艺BOM（M-BOM）</td><td>生产工艺路线</td><td>工艺工程部</td><td>按工艺变更</td></tr>
+        <tr><td>成本BOM（C-BOM）</td><td>成本核算</td><td>财务部</td><td>月度更新</td></tr>
+        <tr><td>生产BOM（P-BOM）</td><td>实际生产领料</td><td>生产计划部</td><td>实时更新</td></tr>
+      </tbody>
+    </table>
+
+    <h4>4.1.2 BOM 变更管理流程</h4>
+    <pre>1. 发起：研发/工艺提出 ECN（工程变更通知）
+2. 审核：相关部门（生产、采购、质量、财务）会签
+3. 财务评估：成本会计评估对标准成本的影响
+4. 生效：审批后在 ERP 中更新 BOM
+5. 切换：明确旧版物料消耗策略（用完为止 or 立即切换）
+6. 记录：变更日志完整存档，至少保存 5 年</pre>
+
+    <h3>4.2 标准成本的制定</h3>
+
+    <h4>4.2.1 标准材料成本</h4>
+    <pre>标准材料成本 = Σ（材料标准用量 × 材料标准单价）</pre>
+    <p><strong>标准用量的来源：</strong></p>
+    <ul>
+      <li>设计BOM中的理论用量</li>
+      <li>+ 工艺允许的损耗率（如：CNC加工损耗率 2%）</li>
+      <li>+ 质量允许的报废率（如：首件调试报废 0.5%）</li>
+    </ul>
+    <p><strong>标准单价的来源：</strong></p>
+    <ul>
+      <li>最新采购合同价格（加权平均）</li>
+      <li>上次实际采购价格</li>
+      <li>市场价格调研（每年至少一次）</li>
+    </ul>
+    <p><strong>制定流程：</strong></p>
+    <pre>采购部提供最新价格 → 成本会计汇总 → 成本主管审核 → 财务经理审批
+                          │
+                  （单价变动 > 10%）
+                          │
+                    ┌─────▼─────┐
+                    │ 专项评估   │
+                    └───────────┘</pre>
+
+    <h4>4.2.2 标准人工成本</h4>
+    <pre>标准人工成本 = 标准工时 × 标准工时费率
+
+标准工时 = 工艺定额工时 + 合理宽放时间（如：喝水休息 5%）
+标准工时费率 = 预算人工成本总额 ÷ 预算总工时</pre>
+    <p><strong>标准工时费率制定表（示例）：</strong></p>
+    <table>
+      <thead><tr><th>车间</th><th>岗位级别</th><th>月标准工资</th><th>月标准工时（H）</th><th>工时费率（元/H）</th></tr></thead>
+      <tbody>
+        <tr><td>CNC</td><td>技师</td><td>12,000</td><td>208</td><td>57.69</td></tr>
+        <tr><td>CNC</td><td>普工</td><td>8,000</td><td>208</td><td>38.46</td></tr>
+        <tr><td>装配</td><td>技师</td><td>10,000</td><td>208</td><td>48.08</td></tr>
+        <tr><td>装配</td><td>普工</td><td>7,000</td><td>208</td><td>33.65</td></tr>
+      </tbody>
+    </table>
+
+    <h4>4.2.3 标准制造费用分配率</h4>
+    <pre>标准制造费用分配率 = 预算年制造费用总额 ÷ 预算年总工时（或机器台时）
+
+按车间分别制定：
+  机加工车间 → 机器台时（因为设备密集）
+  装配车间   → 人工工时（因为劳动密集）</pre>
+
+    <p><strong>制造费用标准分配率（示例）：</strong></p>
+    <table>
+      <thead><tr><th>成本中心</th><th>年预算费用（万元）</th><th>年预算台时/工时</th><th>分配率（元/H）</th></tr></thead>
+      <tbody>
+        <tr><td>CNC加工</td><td>480</td><td>48,000（机器台时）</td><td>100.00</td></tr>
+        <tr><td>车床班组</td><td>120</td><td>24,000（机器台时）</td><td>50.00</td></tr>
+        <tr><td>装配车间</td><td>360</td><td>96,000（人工工时）</td><td>37.50</td></tr>
+      </tbody>
+    </table>
+
+    <h4>4.2.4 标准成本卡（完整示例）</h4>
+    <p><strong>产品型号：M-A01-001 精密数控机床</strong></p>
+    <table>
+      <thead><tr><th>成本项目</th><th>物料/工序编码</th><th>名称</th><th>标准用量</th><th>标准单价/费率</th><th>标准成本</th><th>占比</th></tr></thead>
+      <tbody>
+        <tr style="background:#eef5fa; font-weight:700;"><td>直接材料</td><td></td><td></td><td></td><td></td><td>68,500</td><td>68.5%</td></tr>
+        <tr><td></td><td>RM-001</td><td>铸铁床身</td><td>1 台</td><td>15,000</td><td>15,000</td><td></td></tr>
+        <tr><td></td><td>RM-002</td><td>主轴伺服电机</td><td>1 套</td><td>12,000</td><td>12,000</td><td></td></tr>
+        <tr><td></td><td>RM-003</td><td>滚珠丝杠</td><td>3 套</td><td>3,500</td><td>10,500</td><td></td></tr>
+        <tr><td></td><td>RM-004</td><td>导轨副</td><td>4 套</td><td>2,500</td><td>10,000</td><td></td></tr>
+        <tr><td></td><td>RM-005</td><td>CNC控制系统</td><td>1 套</td><td>18,000</td><td>18,000</td><td></td></tr>
+        <tr><td></td><td>RM-006</td><td>其他辅助材料</td><td>1 批</td><td>3,000</td><td>3,000</td><td></td></tr>
+        <tr style="background:#eef5fa; font-weight:700;"><td>直接人工</td><td></td><td></td><td></td><td></td><td>4,500</td><td>4.5%</td></tr>
+        <tr><td></td><td>OP-01</td><td>CNC加工</td><td>30 H</td><td>60</td><td>1,800</td><td></td></tr>
+        <tr><td></td><td>OP-02</td><td>精密磨削</td><td>15 H</td><td>65</td><td>975</td><td></td></tr>
+        <tr><td></td><td>OP-03</td><td>装配调试</td><td>35 H</td><td>50</td><td>1,750</td><td></td></tr>
+        <tr style="background:#eef5fa; font-weight:700;"><td>制造费用</td><td></td><td></td><td></td><td></td><td>7,500</td><td>7.5%</td></tr>
+        <tr><td></td><td>OH-01</td><td>CNC工序</td><td>30 H</td><td>100</td><td>3,000</td><td></td></tr>
+        <tr><td></td><td>OH-02</td><td>磨削工序</td><td>15 H</td><td>80</td><td>1,200</td><td></td></tr>
+        <tr><td></td><td>OH-03</td><td>装配工序</td><td>35 H</td><td>37.5</td><td>1,313</td><td></td></tr>
+        <tr><td></td><td>OH-04</td><td>固定分摊</td><td>1 台</td><td>2,000</td><td>2,000</td><td></td></tr>
+        <tr style="background:#eef5fa; font-weight:700;"><td>外协加工</td><td></td><td></td><td></td><td></td><td>2,000</td><td>2.0%</td></tr>
+        <tr><td></td><td>OS-01</td><td>导轨热处理</td><td>1 批</td><td>2,000</td><td>2,000</td><td></td></tr>
+        <tr style="background:#d5e8d4; font-weight:700;"><td>标准成本合计</td><td></td><td></td><td></td><td></td><td>82,500</td><td></td></tr>
+        <tr style="background:#fff3e0;"><td>废品损失预留</td><td></td><td></td><td>0.5%</td><td></td><td>413</td><td></td></tr>
+        <tr style="background:#ffe0b2; font-weight:700; font-size:1.05em;"><td>目标标准成本</td><td></td><td></td><td></td><td></td><td>82,913</td><td></td></tr>
+      </tbody>
+    </table>
+
+    <hr>
+
+    <!-- ==================== 第五章 ==================== -->
+    <h2>第五章 直接材料成本核算</h2>
+
+    <h3>5.1 材料计价方法</h3>
+    <pre>采用「移动加权平均法」进行材料日常计价
+（如有ERP系统支持，推荐使用实际成本法+SAP标准价）
+
+移动加权平均单价 = (库存金额 + 本次入库金额) ÷ (库存数量 + 本次入库数量)
+出库成本 = 出库数量 × 移动加权平均单价</pre>
+
+    <h3>5.2 材料领用流程</h3>
+    <pre>生产工单下达 → MRP生成领料单 → 仓库按单备料 → 车间领用签字 → ERP记账
+                                                      │
+                                              ┌───────▼───────┐
+                                              │ 超定额领料流程 │
+                                              └───────┬───────┘
+                                                      │
+                                    1. 车间填写《超定额领料单》
+                                    2. 注明超领原因（报废补料/工艺变更等）
+                                    3. 车间主任审批
+                                    4. 成本会计审核（超过1000元财务经理加签）
+                                    5. 仓库发料</pre>
+
+    <h3>5.3 退料管理</h3>
+    <table>
+      <thead><tr><th>退料类型</th><th>处理方式</th><th>单据</th></tr></thead>
+      <tbody>
+        <tr><td>生产余料</td><td>退回仓库，冲减工单成本</td><td>《红字领料单》或《退料单》</td></tr>
+        <tr><td>不良品退料</td><td>退至不良品仓，单独核算</td><td>《不良品退库单》</td></tr>
+        <tr><td>报废材料</td><td>计入工单废品损失</td><td>《材料报废申请单》</td></tr>
+        <tr><td>供应商退换</td><td>退回供应商，不影响工单成本</td><td>《退货单》</td></tr>
+      </tbody>
+    </table>
+
+    <h3>5.4 月末材料成本核算步骤</h3>
+    <pre>Step 1：核对入库
+  ├── 采购入库单与发票核对（暂估处理）
+  └── 生成当月实际材料单价
+
+Step 2：核对领用
+  ├── 领料单与工单关联核对（确保每笔领料都归入工单）
+  ├── 非工单领料（研发、维修、行政）单独归集
+  └── 超领料单据复核
+
+Step 3：计算材料成本差异
+  ├── 实际领料成本（移动加权平均） vs 标准领料成本（BOM × 标准价）
+  └── 差异 = 实际 - 标准
+        ├── 正差异（不利）= 实际 > 标准（超支）
+        └── 负差异（有利）= 实际 < 标准（节约）
+
+Step 4：差异分析
+  ├── 价格差异 = (实际单价 - 标准单价) × 实际用量
+  ├── 用量差异 = (实际用量 - 标准用量) × 标准单价
+  └── 结构差异 = (实际BOM比例 - 标准BOM比例) × ...</pre>
+
+    <h3>5.5 材料成本差异处理</h3>
+    <pre>                    ┌──────────────┐
+                    │  材料成本差异  │
+                    └──────┬───────┘
+                           │
+              ┌────────────┼────────────┐
+              │            │            │
+        差异率 < 3%   差异率 3-10%  差异率 > 10%
+              │            │            │
+        ┌─────▼─────┐ ┌───▼────────┐ ┌▼──────────┐
+        │月末一次   │ │ 当月分摊至 │ │专项分析   │
+        │结转至     │ │ 完工产品   │ │报财务总监 │
+        │主营业务成本│ │ 和在制品   │ │审批后处理 │
+        └───────────┘ └────────────┘ └───────────┘</pre>
+
+    <hr>
+
+    <!-- ==================== 第六章 ==================== -->
+    <h2>第六章 直接人工成本核算</h2>
+
+    <h3>6.1 工时管理体系</h3>
+
+    <h4>6.1.1 工时类型</h4>
+    <table>
+      <thead><tr><th>工时类型</th><th>定义</th><th>用途</th></tr></thead>
+      <tbody>
+        <tr><td>标准工时</td><td>工艺部门制定的定额工时</td><td>成本预算、产品报价</td></tr>
+        <tr><td>出勤工时</td><td>工人实际出勤时间</td><td>工资计算</td></tr>
+        <tr><td>有效工时</td><td>实际用于生产的工时（出勤 - 停工 - 开会 - 培训）</td><td>成本核算</td></tr>
+        <tr><td>报工工时</td><td>工人汇报在各工单上的工时</td><td>工单成本分配</td></tr>
+      </tbody>
+    </table>
+
+    <h4>6.1.2 工时收集流程</h4>
+    <pre>每日：
+  工人刷工卡记录上班时间
+    ↓
+  每道工序开始/结束刷工单条码（报工）
+    ↓
+  班组长审核报工数据
+    ↓
+  系统自动记录：工单-工序-工人-工时
+
+每周：
+  车间核算员汇总周工时报表
+    ↓
+  与考勤系统核对差异
+
+月末：
+  生成月度工时汇总
+    ↓
+  有效工时 vs 报工工时 勾稽
+    ↓
+  "工时差异率" = (出勤工时 - 报工工时) ÷ 出勤工时
+    要求 ≤ 5%（超过需说明原因）</pre>
+
+    <h3>6.2 人工成本归集</h3>
+    <pre>实际人工成本归集：
+  ├── 直接生产工人工资
+  ├── 加班工资（× 1.5 / 2.0 / 3.0 倍）
+  ├── 绩效奖金（计件/计时）
+  ├── 社保、公积金（公司承担部分）
+  └── 其他直接人工福利
+
+分配方式：
+  直接计入法（适合计件工资制）：
+    └── 工人报工到哪个工单，工资就计入哪个工单
+
+  工时分配法（适合计时工资制）：
+    工单人工成本 = 实际工时费率 × 该工单报工工时
+    实际工时费率 = 当月直接人工总额 ÷ 当月总有效工时</pre>
+
+    <h3>6.3 月末人工成本核算步骤</h3>
+    <pre>Step 1：汇总当月直接人工总额
+Step 2：汇总各工单报工工时
+Step 3：计算实际工时费率
+Step 4：计算各工单人工成本 = 报工工时 × 实际费率
+Step 5：计算人工成本差异
+  ├── 费率差异 = (实际费率 - 标准费率) × 实际工时
+  └── 效率差异 = (实际工时 - 标准工时) × 标准费率
+Step 6：生成《人工成本差异分析表》</pre>
+
+    <h3>6.4 人工效率分析</h3>
+    <table>
+      <thead><tr><th>指标</th><th>计算公式</th><th>警戒值</th></tr></thead>
+      <tbody>
+        <tr><td>工时利用率</td><td>有效工时 ÷ 出勤工时 × 100%</td><td>&lt; 85%</td></tr>
+        <tr><td>标准工时达成率</td><td>标准工时 ÷ 实际工时 × 100%</td><td>&lt; 95%</td></tr>
+        <tr><td>直接人工占比</td><td>直接人工 ÷ 总人工成本 × 100%</td><td>&lt; 70%</td></tr>
+      </tbody>
+    </table>
+
+    <hr>
+
+    <!-- ==================== 第七章 ==================== -->
+    <h2>第七章 制造费用归集与分配</h2>
+
+    <h3>7.1 制造费用归集</h3>
+
+    <h4>7.1.1 制造费用科目设置</h4>
+    <table>
+      <thead><tr><th>科目编码</th><th>科目名称</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td>5101</td><td>制造费用-间接人工</td><td>车间管理人员、辅助工人</td></tr>
+        <tr><td>5102</td><td>制造费用-折旧费</td><td>机器设备、厂房折旧</td></tr>
+        <tr><td>5103</td><td>制造费用-水电费</td><td>生产用电、用水</td></tr>
+        <tr><td>5104</td><td>制造费用-修理费</td><td>设备维修、保养</td></tr>
+        <tr><td>5105</td><td>制造费用-机物料消耗</td><td>刀具、砂轮、润滑油等</td></tr>
+        <tr><td>5106</td><td>制造费用-劳动保护费</td><td>劳保用品、安全防护</td></tr>
+        <tr><td>5107</td><td>制造费用-低值易耗品</td><td>工具、量具摊销</td></tr>
+        <tr><td>5108</td><td>制造费用-检验试验费</td><td>质检材料、计量校准</td></tr>
+        <tr><td>5109</td><td>制造费用-运输费</td><td>厂内物流、叉车费用</td></tr>
+        <tr><td>5110</td><td>制造费用-办公费</td><td>车间办公消耗</td></tr>
+        <tr><td>5111</td><td>制造费用-其他</td><td>上述未包含的其他间接费用</td></tr>
+      </tbody>
+    </table>
+
+    <h4>7.1.2 制造费用归集原则</h4>
+    <pre>日常归集：
+  ├── 能直接归属到车间的 → 直接计入该车间成本中心
+  ├── 跨车间共享的 → 先归集到辅助成本中心，再分配
+  └── 共通费用 → 按合理标准分配
+
+月末归集要点：
+  1. 折旧计提完毕（含本月新增、报废资产）
+  2. 水电费按表计数入账（与能源部门核对）
+  3. 所有费用发票已入账
+  4. 预提费用已计提（如设备大修准备金）</pre>
+
+    <h3>7.2 制造费用分配方法</h3>
+
+    <h4>7.2.1 分配层级</h4>
+    <pre>第一层：辅助生产费用分配（交互分配法）
+
+  模具中心费用 ──→ 按各车间模具使用量分配
+  设备动力科   ──→ 按各车间设备功率、维修工时分配
+  质检中心     ──→ 按各车间送检批次、检验工时分配
+
+第二层：车间制造费用分配到产品
+
+  各车间归集完整后的制造费用总额
+          ↓
+  按该车间适用的分配率分配到各工单</pre>
+
+    <h4>7.2.2 分配率类型与适用场景</h4>
+    <table>
+      <thead><tr><th>分配基础</th><th>适用场景</th><th>公式</th></tr></thead>
+      <tbody>
+        <tr><td>机器台时</td><td>自动化程度高的机加工车间</td><td>制造费用 ÷ 机器台时总数</td></tr>
+        <tr><td>直接人工工时</td><td>劳动密集型的装配车间</td><td>制造费用 ÷ 直接人工总工时</td></tr>
+        <tr><td>直接人工成本</td><td>工资差异小的车间</td><td>制造费用 ÷ 直接人工总成本</td></tr>
+        <tr><td>直接材料成本</td><td>材料占比稳定的车间</td><td>制造费用 ÷ 直接材料总成本</td></tr>
+        <tr><td>产量</td><td>单一产品大量生产</td><td>制造费用 ÷ 总产量</td></tr>
+      </tbody>
+    </table>
+
+    <h4>7.2.3 分配计算示例（机加工车间）</h4>
+    <pre>机加工车间当月制造费用总额：420,000 元
+当月机器总台时：4,000 小时
+
+分配率 = 420,000 ÷ 4,000 = 105 元/台时
+
+工单 WO-202606-001（产品A）：
+  ├── 使用机器 25 小时 → 分摊 25 × 105 = 2,625 元
+  └── 标准制造费用（标准费率100元 × 标准工时30H = 3,000元）
+        → 差异 = 2,625 - 3,000 = -375（有利差异）
+
+工单 WO-202606-002（产品B）：
+  ├── 使用机器 15 小时 → 分摊 15 × 105 = 1,575 元
+  └── 标准制造费用（标准费率100元 × 标准工时13H = 1,300元）
+        → 差异 = 1,575 - 1,300 = 275（不利差异）</pre>
+
+    <h3>7.3 固定制造费用 vs 变动制造费用</h3>
+    <table>
+      <thead><tr><th>分类</th><th>项目举例</th><th>分配方式</th></tr></thead>
+      <tbody>
+        <tr><td>变动制造费用</td><td>刀具消耗、动力电、计件质检费</td><td>按实际动因量分配</td></tr>
+        <tr><td>固定制造费用</td><td>折旧、车间管理工资、保险费</td><td>按预算产能分摊</td></tr>
+        <tr><td>半变动费用</td><td>维修费（基量+增量）</td><td>按高低点法或回归法拆分</td></tr>
+      </tbody>
+    </table>
+
+    <hr>
+
+    <!-- ==================== 第八章 ==================== -->
+    <h2>第八章 在制品（WIP）成本核算</h2>
+
+    <h3>8.1 WIP 的定义与范围</h3>
+    <p>在制品 = 已投产但未完成全部工序、尚未验收入库的产品</p>
+    <pre>在制品包括：
+  ├── 正在加工中的产品（机床上正在切削的零件）
+  ├── 已完成部分工序等待下道工序的产品（工序间周转件）
+  ├── 已完成加工等待检验的产品
+  └── 已入库待装配的半成品（如果不单独核算）</pre>
+
+    <h3>8.2 WIP 盘点制度</h3>
+    <table>
+      <thead><tr><th>盘点类型</th><th>频率</th><th>执行人</th><th>要求</th></tr></thead>
+      <tbody>
+        <tr><td>日常循环盘点</td><td>每日（部分工序）</td><td>班组自盘</td><td>保持账实一致</td></tr>
+        <tr><td>月末全面盘点</td><td>每月最后一天</td><td>车间+财务</td><td>编制《在制品盘点表》</td></tr>
+        <tr><td>年度大盘点</td><td>每年12月31日</td><td>全公司</td><td>停线盘点（如无法停线，分批轮盘）</td></tr>
+      </tbody>
+    </table>
+
+    <h3>8.3 WIP 计价方法</h3>
+
+    <h4>8.3.1 约当产量法（推荐）</h4>
+    <pre>约当产量 = 在制品数量 × 完工程度%
+
+完工产品总成本 = 期初WIP成本 + 本期投入成本
+完工产品单位成本 = 完工产品总成本 ÷ (完工数量 + 期末WIP约当产量)
+期末WIP成本 = 完工产品单位成本 × 期末WIP约当产量</pre>
+
+    <table>
+      <thead><tr><th>成本项目</th><th>完工程度判定</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td>直接材料</td><td>投料时100% or 按工序</td><td>一次性投料 = 100%；分次投料按比例</td></tr>
+        <tr><td>直接人工</td><td>按实际完工%</td><td>由车间技术员评估</td></tr>
+        <tr><td>制造费用</td><td>同人工</td><td>与人工进度保持一致</td></tr>
+      </tbody>
+    </table>
+
+    <h4>8.3.2 WIP 核算示例</h4>
+    <pre>产品：M-A01-001 数控机床
+当月数据：
+  期初WIP：5台，完工程度 60%，已投入成本 350,000 元
+  本期投产：20台
+  本期完工：18台
+  期末WIP：7台，完工程度 40%
+  本期投入成本：1,450,000 元
+
+材料约当产量（一次性投料）：
+  完工当量 = 18 + 7 = 25（投料率100%）
+  材料单位成本 = (350,000×60% + 1,450,000) ÷ 25 = ...
+
+人工/制造费用约当产量：
+  完工当量 = 18 + 7×40% = 18 + 2.8 = 20.8
+  加工费单位成本 = (350,000中的人工费用 + 本期人工) ÷ 20.8 = ...
+
+期末WIP成本 = 期末材料成本 + 期末加工费成本</pre>
+
+    <h3>8.4 废品与返工成本处理</h3>
+    <table>
+      <thead><tr><th>情况</th><th>处理方式</th></tr></thead>
+      <tbody>
+        <tr><td>正常废品（合理损耗内）</td><td>计入合格品成本，由合格品承担</td></tr>
+        <tr><td>非正常废品</td><td>单独归集，计入当期损失，问责追偿</td></tr>
+        <tr><td>可修复废品</td><td>返工成本计入原工单，分析返工原因</td></tr>
+        <tr><td>不可修复废品</td><td>残料作价入库，净值计入损失</td></tr>
+      </tbody>
+    </table>
+
+    <hr>
+
+    <!-- ==================== 第九章 ==================== -->
+    <h2>第九章 完工产品成本结转</h2>
+
+    <h3>9.1 完工产品确认</h3>
+    <pre>完工确认条件（同时满足）：
+  ✓ 完成全部工序，通过最终检验
+  ✓ 质检合格，出具《产品检验合格证》
+  ✓ 办理入库手续，生成《完工入库单》
+  ✓ 工单全部领料已核销，无未清材料
+  ✓ 工单工时已全部报工完毕
+
+禁止行为：
+  ✗ 未完工提前入库（虚增完工产量）
+  ✗ 已完工不入库（操作利润）
+  ✗ 工单未关闭擅自转成本</pre>
+
+    <h3>9.2 成本结转流程</h3>
+    <pre>Step 1：工单结算
+  ├── 工单全部材料已领出（或退料完毕）
+  ├── 工单全部报工已完成
+  └── 制造费用已分摊
+
+Step 2：计算工单总成本
+  工单总成本 = 直接材料 + 直接人工 + 制造费用 + 外协加工费
+
+Step 3：在制品分离
+  完工成本 = 工单总成本 - 期末WIP成本
+
+Step 4：会计分录
+  借：库存商品—完工产品        XXX
+  贷：生产成本—直接材料          XXX
+  贷：生产成本—直接人工          XXX
+  贷：生产成本—制造费用          XXX
+  贷：生产成本—外协加工费        XXX
+
+Step 5：差异结转（标准成本法）
+  实际成本 vs 标准成本 → 差异科目
+  差异分摊至：营业成本、库存商品、在制品</pre>
+
+    <h3>9.3 工单关闭管理</h3>
+    <pre>工单关闭条件：
+  □ 全部工序已完成
+  □ 全部材料已核销（无未清采购、无未清领料）
+  □ 完工产品已全部入库
+  □ 质量状态已确认（合格/不合格/返工）
+  □ 成本已计算完毕
+  □ 差异已分析（超过 10% 的原因已说明）
+
+超期未关闭工单管理：
+  ├── 50天未关 → 成本会计提醒车间
+  ├── 70天未关 → 财务经理发预警通知
+  └── 90天未关 → 强制关闭（计入当期损失，专项报告）</pre>
+
+    <hr>
+
+    <!-- ==================== 第十章 ==================== -->
+    <h2>第十章 成本差异分析体系（标准成本法）</h2>
+
+    <h3>10.1 差异分析框架</h3>
+    <pre>实际成本 vs 标准成本 = 总差异
+
+总差异分解：
+
+├── 直接材料差异
+│   ├── 材料价格差异 = (实际单价 - 标准单价) × 实际用量
+│   ├── 材料用量差异 = (实际用量 - 标准用量) × 标准单价
+│   └── 材料组合差异 = (实际配比 - 标准配比) × ...
+│
+├── 直接人工差异
+│   ├── 人工费率差异 = (实际费率 - 标准费率) × 实际工时
+│   └── 人工效率差异 = (实际工时 - 标准工时) × 标准费率
+│
+├── 变动制造费用差异
+│   ├── 变动费用支出差异 = 实际变动费用 - 预算变动费用
+│   └── 变动费用效率差异 = (实际工时 - 标准工时) × 标准变动费率
+│
+└── 固定制造费用差异
+    ├── 固定费用预算差异 = 实际固定费用 - 预算固定费用
+    └── 固定费用产能差异 = (预算工时 - 实际工时) × 标准固定费率</pre>
+
+    <h3>10.2 差异分析报表</h3>
+    <p><strong>月度成本差异汇总表（示例）：</strong></p>
+    <table>
+      <thead><tr><th>成本项目</th><th>标准成本</th><th>实际成本</th><th>差异金额</th><th>差异率</th><th>价格因素</th><th>用量因素</th><th>责任人</th></tr></thead>
+      <tbody>
+        <tr><td>直接材料</td><td>685,000</td><td>710,000</td><td style="color:#d63031;">+25,000</td><td style="color:#d63031;">+3.6%</td><td>+18,000</td><td>+7,000</td><td>采购/车间</td></tr>
+        <tr><td>直接人工</td><td>45,000</td><td>47,500</td><td style="color:#d63031;">+2,500</td><td style="color:#d63031;">+5.6%</td><td>+1,000</td><td>+1,500</td><td>生产经理</td></tr>
+        <tr><td>制造费用</td><td>75,000</td><td>72,000</td><td style="color:#00b894;">-3,000</td><td style="color:#00b894;">-4.0%</td><td>-</td><td>-3,000</td><td>车间主任</td></tr>
+        <tr><td>外协加工</td><td>20,000</td><td>21,000</td><td style="color:#d63031;">+1,000</td><td style="color:#d63031;">+5.0%</td><td>+1,000</td><td>-</td><td>采购</td></tr>
+        <tr style="background:#eef5fa; font-weight:700;"><td>合计</td><td>825,000</td><td>850,500</td><td style="color:#d63031;">+25,500</td><td style="color:#d63031;">+3.1%</td><td></td><td></td><td>成本主管</td></tr>
+      </tbody>
+    </table>
+
+    <h3>10.3 差异追责与行动</h3>
+    <table>
+      <thead><tr><th>差异类型</th><th>责任方</th><th>行动要求</th></tr></thead>
+      <tbody>
+        <tr><td>材料价格差异 &gt; 5%</td><td>采购部</td><td>3日内提交价格波动分析及对策</td></tr>
+        <tr><td>材料用量差异 &gt; 3%</td><td>车间</td><td>分析报废率、损耗率，提交改善计划</td></tr>
+        <tr><td>人工效率差异 &gt; 10%</td><td>生产部</td><td>分析瓶颈工序，优化排产</td></tr>
+        <tr><td>固定费用差异 &gt; 10%</td><td>财务+车间</td><td>联合分析费用异常项目</td></tr>
+        <tr><td>连续3个月同一差异方向</td><td>财务总监</td><td>组织专项成本改善项目</td></tr>
+      </tbody>
+    </table>
+
+    <hr>
+
+    <!-- ==================== 第十一章 ==================== -->
+    <h2>第十一章 成本报表体系</h2>
+
+    <h3>11.1 报表清单及发布周期</h3>
+    <table>
+      <thead><tr><th>序号</th><th>报表名称</th><th>发布频率</th><th>报送对象</th><th>截止日</th></tr></thead>
+      <tbody>
+        <tr><td>R01</td><td>产品标准成本卡</td><td>按需更新</td><td>销售、研发</td><td>-</td></tr>
+        <tr><td>R02</td><td>车间生产成本日报</td><td>每日</td><td>车间主任</td><td>T+1 10:00</td></tr>
+        <tr><td>R03</td><td>材料成本差异简报</td><td>每周</td><td>采购经理</td><td>T+1 周一</td></tr>
+        <tr><td>R04</td><td>在制品盘点汇总表</td><td>每月</td><td>成本主管</td><td>月末最后一天</td></tr>
+        <tr><td>R05</td><td>产品成本计算表</td><td>每月</td><td>财务经理</td><td>次月5日</td></tr>
+        <tr><td>R06</td><td>成本差异分析报告</td><td>每月</td><td>财务总监</td><td>次月7日</td></tr>
+        <tr><td>R07</td><td>产品毛利分析表</td><td>每月</td><td>销售总监</td><td>次月8日</td></tr>
+        <tr><td>R08</td><td>制造费用明细表</td><td>每月</td><td>车间主任</td><td>次月5日</td></tr>
+        <tr><td>R09</td><td>成本趋势分析报告</td><td>每季</td><td>总经理</td><td>次月15日</td></tr>
+        <tr><td>R10</td><td>年度成本综合分析</td><td>每年</td><td>董事会</td><td>次年1月</td></tr>
+      </tbody>
+    </table>
+
+    <h3>11.2 核心报表格式</h3>
+
+    <h4>R03：周度材料成本差异简报</h4>
+    <pre>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  第 XX 周材料成本差异简报（06.23-06.28）
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+【本周材料采购价格变动】
+  涨幅 Top3：
+    1. 铸铁   +8.2%  供应商调价
+    2. 铜材   +5.1%  期货价格上涨
+
+【本周领用超定额预警】
+  工单 WO-202606-015 钢材超领 12%  →  待核实
+  工单 WO-202606-022 刀具超领 18%  →  已确认：新员工操作失误
+
+【累计差异趋势】
+  W22  W23  W24  W25  W26
+  +2.1 +1.8 +2.5 +3.2 +3.6  ← 连续上升，需关注
+
+报告人：成本会计A    审核：成本主管</pre>
+
+    <h4>R06：月度成本差异分析报告（结构）</h4>
+    <pre>一、总体概述
+  - 本月总差异率 X.X%，较上月变化 ±X.Xpp
+  - 主要原因：...
+
+二、材料成本差异明细
+  2.1 价格差异分析（按物料类别）
+  2.2 用量差异分析（按主要物料）
+  2.3 供应商价格对比
+
+三、人工成本差异明细
+  3.1 费率差异（实际工资变动分析）
+  3.2 效率差异（各车间、各产线对比）
+
+四、制造费用差异明细
+  4.1 费用项目对比（预算 vs 实际）
+  4.2 产能利用率分析
+
+五、异常工单分析
+  5.1 差异率 > 20% 的工单明细
+  5.2 原因分析与改进措施
+
+六、改善行动追踪
+  6.1 上月问题改进进展
+  6.2 本月新增问题及责任人
+
+七、下月预测
+  7.1 材料价格走势
+  7.2 开工率预计</pre>
+
+    <h3>11.3 报表使用说明</h3>
+    <ul>
+      <li>各车间、部门应在收到报表后 <strong>3 个工作日内</strong> 反馈意见</li>
+      <li>所有成本报表为<strong>内部机密资料</strong>，未经授权不得外传</li>
+      <li>成本报表电子版归档路径：<code>\\company-server\财务\成本报表\YYYY\</code></li>
+      <li>纸质版需财务总监签字后存档，保存期限 <strong>10 年</strong></li>
+    </ul>
+
+    <hr>
+
+    <!-- ==================== 第十二章 ==================== -->
+    <h2>第十二章 成本考核 KPI 体系</h2>
+
+    <h3>12.1 KPI 指标总览</h3>
+    <table>
+      <thead><tr><th>维度</th><th>KPI 指标</th><th>计算公式</th><th>目标值</th><th>权重</th></tr></thead>
+      <tbody>
+        <tr><td rowspan="3" style="vertical-align:middle;">成本控制</td><td>单位产品成本降低率</td><td>(本期单位成本 - 基期) ÷ 基期</td><td>≥ 3%</td><td>25%</td></tr>
+        <tr><td>材料成本差异率</td><td>实际材料成本 ÷ 标准材料成本 - 1</td><td>≤ 3%</td><td>15%</td></tr>
+        <tr><td>制造费用预算执行率</td><td>实际制造费用 ÷ 预算制造费用</td><td>≤ 100%</td><td>10%</td></tr>
+        <tr><td rowspan="2" style="vertical-align:middle;">效率</td><td>人工效率差异率</td><td>实际工时 ÷ 标准工时 - 1</td><td>≤ 5%</td><td>10%</td></tr>
+        <tr><td>产能利用率</td><td>实际产能 ÷ 设计产能</td><td>≥ 85%</td><td>10%</td></tr>
+        <tr><td rowspan="2" style="vertical-align:middle;">质量成本</td><td>废品损失率</td><td>废品损失金额 ÷ 生产总成本</td><td>≤ 1%</td><td>10%</td></tr>
+        <tr><td>返工率</td><td>返工工时 ÷ 总生产工时</td><td>≤ 3%</td><td>5%</td></tr>
+        <tr><td rowspan="2" style="vertical-align:middle;">合规</td><td>成本核算及时率</td><td>按时完成核算次数 ÷ 总次数</td><td>100%</td><td>5%</td></tr>
+        <tr><td>盘点差异率</td><td>盘点差异金额 ÷ 存货总额</td><td>≤ 0.5%</td><td>5%</td></tr>
+        <tr><td>改善</td><td>成本改善项目完成率</td><td>已完成项目 ÷ 计划项目</td><td>≥ 90%</td><td>5%</td></tr>
+      </tbody>
+    </table>
+
+    <h3>12.2 KPI 细化到岗位</h3>
+    <table>
+      <thead><tr><th>岗位</th><th>核心 KPI</th><th>数据来源</th></tr></thead>
+      <tbody>
+        <tr><td>采购经理</td><td>材料价格差异率 ≤ 3%、供应商交期达成率 ≥ 95%</td><td>ERP采购模块</td></tr>
+        <tr><td>生产经理</td><td>人工效率差异率 ≤ 5%、废品率 ≤ 1%</td><td>MES/生产报表</td></tr>
+        <tr><td>车间主任</td><td>制造费用预算执行 ≤ 100%、产能利用率 ≥ 85%</td><td>财务+生产</td></tr>
+        <tr><td>仓库主管</td><td>库存准确率 ≥ 99.5%、呆滞料占比 ≤ 5%</td><td>盘点报告</td></tr>
+        <tr><td>成本主管</td><td>核算及时率 100%、报表准确率 ≥ 99%</td><td>财务经理评价</td></tr>
+      </tbody>
+    </table>
+
+    <h3>12.3 考核结果应用</h3>
+    <pre>考核等级：
+  S 级（优秀）：得分 ≥ 95  →  绩效系数 1.3 × 标准奖金
+  A 级（良好）：得分 85-94 →  绩效系数 1.1 × 标准奖金
+  B 级（合格）：得分 70-84 →  绩效系数 1.0 × 标准奖金
+  C 级（待改进）：得分 60-69 →  绩效系数 0.7 × 标准奖金
+  D 级（不合格）：得分 < 60  →  绩效系数 0.5 × 标准奖金，列入改善计划
+
+连续 2 个季度 D 级：
+  → 岗位调整或降职降薪</pre>
+
+    <hr>
+
+    <!-- ==================== 第十三章 ==================== -->
+    <h2>第十三章 成本信息化管理规范</h2>
+
+    <h3>13.1 ERP 系统数据管理</h3>
+    <table>
+      <thead><tr><th>数据模块</th><th>维护责任</th><th>更新频率</th><th>稽核周期</th></tr></thead>
+      <tbody>
+        <tr><td>物料主数据</td><td>研发/工程</td><td>实时</td><td>月度</td></tr>
+        <tr><td>BOM 数据</td><td>工艺工程</td><td>按ECN</td><td>月度</td></tr>
+        <tr><td>工艺路线</td><td>工艺工程</td><td>按变更</td><td>季度</td></tr>
+        <tr><td>成本价（标准）</td><td>财务成本组</td><td>月度</td><td>月度</td></tr>
+        <tr><td>采购价格</td><td>采购部</td><td>实时</td><td>周度</td></tr>
+        <tr><td>库存数量</td><td>仓库</td><td>实时</td><td>日度</td></tr>
+      </tbody>
+    </table>
+
+    <h3>13.2 数据稽核规则</h3>
+    <pre>月度成本核算前必须完成的稽核：
+
+□ 采购入库单与发票勾稽（暂估清理）
+□ 生产领料单与工单关联勾稽
+□ 完工入库与工单关联合规检查
+□ 工时数据与考勤数据勾稽
+□ 制造费用全部入账
+□ 折旧计算正确
+□ 无负库存、无零单价出库
+□ 所有当月工单状态正常（无非正常挂起）
+□ 在制品盘点完成</pre>
+
+    <h3>13.3 系统权限管理</h3>
+    <table>
+      <thead><tr><th>角色</th><th>查看权限</th><th>修改权限</th><th>审批权限</th></tr></thead>
+      <tbody>
+        <tr><td>车间核算员</td><td>本车间成本</td><td>工时数据</td><td>-</td></tr>
+        <tr><td>成本会计</td><td>全部成本</td><td>成本调整（&lt;5K）</td><td>-</td></tr>
+        <tr><td>成本主管</td><td>全部成本</td><td>成本调整（&lt;20K）</td><td>常规调整</td></tr>
+        <tr><td>财务经理</td><td>全部成本</td><td>成本调整（&lt;100K）</td><td>重大调整</td></tr>
+        <tr><td>财务总监</td><td>全部成本</td><td>-</td><td>超过100K调整</td></tr>
+      </tbody>
+    </table>
+
+    <hr>
+
+    <!-- ==================== 第十四章 ==================== -->
+    <h2>第十四章 附则</h2>
+
+    <h3>14.1 制度修订</h3>
+    <ul>
+      <li>本制度随国家会计准则、税法变化或公司业务重大调整时修订</li>
+      <li>常规修订由财务部提议，财务总监审批</li>
+      <li>重大修订需总经理审批</li>
+      <li>年度至少审视一次制度的适用性</li>
+    </ul>
+
+    <h3>14.2 制度生效</h3>
+    <ul>
+      <li>本制度自发布之日起生效，试行期 3 个月</li>
+      <li>试行期满后根据反馈意见修订完善，转为正式制度</li>
+    </ul>
+
+    <h3>14.3 相关文件</h3>
+    <table>
+      <thead><tr><th>文件编号</th><th>文件名称</th></tr></thead>
+      <tbody>
+        <tr><td>ACC-SOP-001</td><td>材料领用操作细则</td></tr>
+        <tr><td>ACC-SOP-002</td><td>工时报工操作细则</td></tr>
+        <tr><td>ACC-SOP-003</td><td>在制品盘点操作细则</td></tr>
+        <tr><td>ACC-SOP-004</td><td>工单关闭操作细则</td></tr>
+        <tr><td>ACC-SOP-005</td><td>成本月结操作手册</td></tr>
+        <tr><td>ACC-FORM-001</td><td>材料领用单</td></tr>
+        <tr><td>ACC-FORM-002</td><td>超定额领料申请单</td></tr>
+        <tr><td>ACC-FORM-003</td><td>生产日报表</td></tr>
+        <tr><td>ACC-FORM-004</td><td>在制品盘点表</td></tr>
+        <tr><td>ACC-FORM-005</td><td>成本差异分析表</td></tr>
+        <tr><td>ACC-FORM-006</td><td>产品标准成本卡</td></tr>
+        <tr><td>ACC-FORM-007</td><td>废品/返工报告单</td></tr>
+      </tbody>
+    </table>
+
+    <h3>14.4 附录：关键流程图</h3>
+
+    <h4>成本月结流程图</h4>
+    <pre>T月末前3日          T月末               T+1日           T+3日          T+5日         T+7日
+   │                  │                  │               │              │             │
+   ▼                  ▼                  ▼               ▼              ▼             ▼
+┌──────┐        ┌──────────┐      ┌──────────┐    ┌──────────┐  ┌──────────┐  ┌──────────┐
+│材料   │        │ 生产截止  │      │ 工时     │    │ 费用     │  │ 成本     │  │ 差异     │
+│暂估   │───────▶│ 在制品   │─────▶│ 数据     │───▶│ 归集     │─▶│ 计算     │─▶│ 分析     │
+│清理   │        │ 盘点     │      │ 汇总     │    │ 分配     │  │ 结转     │  │ 报告     │
+└──────┘        └──────────┘      └──────────┘    └──────────┘  └──────────┘  └──────────┘
+   │                  │                  │               │              │             │
+   ▼                  ▼                  ▼               ▼              ▼             ▼
+ 核对采购       班组长+财务         报工与考勤      折旧+水电+       WIP分离       差异分解
+ 发票与入库     联合盘点            核对            维修等费用      +完工结转      +责任人确认</pre>
+
+    <hr>
+
+    <!-- ==================== Insight 框 ==================== -->
+    <div class="insight-box">
+      <div class="insight-title">★ Insight：离散制造成本核算的关键成功要素</div>
+      <ol>
+        <li><strong>BOM 是灵魂 🔑</strong> — 离散制造的成本核算准确度，80%取决于 BOM 的准确性。没有准确的 BOM，标准成本就是空中楼阁。建议每月至少对 A 类物料（金额占比 80%）的 BOM 进行抽检核对</li>
+        <li><strong>工时报工是最大痛点 ⏱️</strong> — 工人不愿意报工、报错工单、漏报是行业通病。用条码扫描/移动端报工 + 报工率纳入考核，是经过验证的有效方案</li>
+        <li><strong>差异分析要有行动闭环 🔄</strong> — 很多企业把差异分析当成报表交差，却没人 follow up。每一条异常差异都必须有责任人、有改善动作、有到期复查</li>
+        <li><strong>离散制造适合"标准成本 + 分批法"双轨</strong> — 标准成本用于日常核算和存货计价，分批法（工单级）用于实际成本分析和定价决策，两者互补而非替代</li>
+      </ol>
+    </div>
+
+    <hr>
+
+    <blockquote>
+      <strong>编制：CC - AI 助理</strong><br>
+      审核：（待填写）<br>
+      批准：（待填写）<br>
+      生效日期：（待填写）
+    </blockquote>
+
+    <p class="no-indent" style="text-align:center; color:#636e72; margin-top:30px;">
+      📄 <em>如需导出 PDF 或打印，请使用浏览器打印功能（Ctrl+P）</em>
+    </p>
+
+  </div><!-- /.content -->
+
+  <div class="footer">
+    <p>© 2026 离散制造型企业成本核算专项制度 · 详尽版 V1.0</p>
+    <p>内部机密文件 · 未经授权不得外传</p>
+  </div>
+
+</div><!-- /.container -->
+
+</body>
+</html>
